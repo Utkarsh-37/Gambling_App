@@ -9,6 +9,7 @@ from services.stake_management_service import StakeManagementService
 from services.game_session_manager import GameSessionManager
 from utils.exceptions import ValidationException
 from utils.decorators import service_logger
+from services.win_loss_calculator import WinLossCalculator, OddsConfiguration
 
 class BettingService:
     def __init__(self):
@@ -16,6 +17,7 @@ class BettingService:
         self.profile_service = GamblerProfileService()
         self.stake_service = StakeManagementService()
         self.session_manager = GameSessionManager()
+        self.calculator = WinLossCalculator()
 
     @service_logger
     def place_and_settle_bet(self, gambler_id: int, amount: Decimal, win_probability: float, strategy_id: int = 1):
@@ -39,33 +41,48 @@ class BettingService:
         if amount < prefs.min_bet or amount > prefs.max_bet:
             raise ValidationException(f"Bet outside preferences limits (${prefs.min_bet:.2f} - ${prefs.max_bet:.2f}).")
 
+        # UC5: Setup Default Odds (You can fetch this from DB later)
+        odds = OddsConfiguration(odds_type="FIXED", fixed_multiplier=Decimal("2.0"), house_edge=Decimal("0.02"))
+
         # 3. Record Bet Placement
-        potential_win = amount * Decimal("2.0")
+        potential_win = self.calculator.calculate_potential_winnings(amount, win_probability, odds)
         bet = Bet(
-            gambler_id=gambler_id, bet_amount=amount, win_probability=win_probability,
-            stake_before=stake, potential_win=potential_win, strategy_id=strategy_id,
+            gambler_id=gambler_id, 
+            bet_amount=amount, 
+            win_probability=win_probability,
+            stake_before=stake, 
+            potential_win=potential_win, 
+            strategy_id=strategy_id,
             session_id=active_session.session_id if active_session else None
         )
         bet = self.repo.create_bet(bet)
 
-        # 4. Determine Outcome
-        is_win = random.random() < win_probability
-        outcome_str = "WIN" if is_win else "LOSS"
+        # 4. Determine Outcome (Using UC5 Engine)
+        outcome_str = self.calculator.determine_outcome(win_probability, odds.house_edge)
+        is_win = outcome_str == "WIN"
 
         # 5. Financial Transaction
         trans_type = TransactionType.BET_WIN if is_win else TransactionType.BET_LOSS
-        tx_amount = amount 
+        # If win, you receive the full potential_win MINUS your original bet amount as net profit
+        tx_amount = (potential_win - amount) if is_win else amount 
         tx = self.stake_service.adjust_stake(gambler_id, trans_type, tx_amount)
 
         # 6. Record Game & Settle
         game_rec = GameRecord(
             bet_id=bet.bet_id, outcome=outcome_str, net_change=tx_amount if is_win else -tx_amount,
             stake_before=tx.balance_before, stake_after=tx.balance_after,
-            payout_amount=amount * 2 if is_win else Decimal("0.0"),
+            payout_amount=potential_win if is_win else Decimal("0.0"),
             loss_amount=Decimal("0.0") if is_win else amount,
             session_id=active_session.session_id if active_session else None
         )
         self.repo.settle_bet_and_record_game(bet.bet_id, game_rec)
+        
+        # UC5: Generate Deep Statistics Snapshot
+        if active_session:
+            # Need game_id which is created by settle_bet_and_record_game. 
+            # (Note: In a real app, update repository to return the game_id).
+            game_rec.game_id = bet.bet_id # Temporary mapping since bet_id and game_id are 1:1 right now
+            self.calculator.generate_snapshot(active_session.session_id, game_rec, active_session.starting_stake)
 
         # 7. Check Boundaries & UPDATE SESSION
         boundary = self.stake_service.check_boundaries(gambler_id)

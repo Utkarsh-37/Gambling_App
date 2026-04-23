@@ -9,6 +9,7 @@ from controllers.gambler_controller import GamblerController
 from controllers.stake_controller import StakeController  # Added for UC2
 from controllers.betting_controller import BettingController
 from controllers.session_controller import SessionController
+from controllers.win_loss_controller import WinLossController
 
 console = Console()
 
@@ -38,9 +39,10 @@ def display_menu():
     console.print("8. Start Game Session")
     console.print("9. Pause/Resume Session")
     console.print("10. End Session")
-    console.print("  10a. View Session Summary")
-    console.print("11. Exit")
-    return Prompt.ask("Select an option", choices=["1", "1a", "1b", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10a", "11"])
+    console.print("  10a. View Session Summary(Basic)")
+    console.print("11. View Advanced Session Stats (UC5)")
+    console.print("12. Exit")
+    return Prompt.ask("Select an option", choices=["1", "1a", "1b", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10a", "11", "12"])
 
 def main():
     # 1. Boot up DB
@@ -55,6 +57,7 @@ def main():
     stake_controller = StakeController()
     betting_controller = BettingController()  
     session_controller = SessionController()
+    win_loss_controller = WinLossController()
 
     # 2. Main Event Loop
     while True:
@@ -323,8 +326,39 @@ def main():
                 console.print(table)
             else:
                 console.print(f"[bold red]✖ Error:[/bold red] {res['message']}")
-
+        
         elif choice == "11":
+            console.print("\n[bold yellow]--- Advanced Statistics (UC5) ---[/bold yellow]")
+            sid = Prompt.ask("Enter Session ID")
+            
+            with console.status("Calculating deep statistics..."):
+                res = win_loss_controller.get_latest_statistics(int(sid))
+            
+            if res["status"] == "success":
+                snap = res["data"]
+                table = Table(title=f"Deep Stats for Session {sid}")
+                table.add_column("Metric", style="cyan")
+                table.add_column("Value", style="magenta")
+                
+                # Format Decimals nicely
+                winnings = float(snap['total_winnings'])
+                losses = float(snap['total_losses_amount'])
+                net = float(snap['net_profit'])
+                win_rate = float(snap['win_rate']) * 100
+                roi = float(snap['roi']) * 100
+                
+                table.add_row("Total Winnings / Losses", f"${winnings:.2f} / ${losses:.2f}")
+                table.add_row("Net Profit", f"${net:.2f}")
+                table.add_row("Win Rate", f"{win_rate:.1f}%")
+                table.add_row("Profit Factor", f"{snap['profit_factor']:.2f}x")
+                table.add_row("Session ROI", f"{roi:.2f}%")
+                table.add_row("Longest Streaks", f"Wins: {snap['longest_win_streak']} | Losses: {snap['longest_loss_streak']}")
+                table.add_row("Current Streaks", f"Wins: {snap['current_win_streak']} | Losses: {snap['current_loss_streak']}")
+                console.print(table)
+            else:
+                console.print(f"\n[bold red]✖ Error:[/bold red] {res['message']}\n")
+
+        elif choice == "12":
             console.print("[bold cyan]Exiting application. Goodbye![/bold cyan]")
             break
 
