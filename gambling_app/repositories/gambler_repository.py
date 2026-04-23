@@ -84,3 +84,18 @@ class GamblerRepository:
         finally:
             cursor.close()
             conn.close()
+    
+    def update_preferences(self, prefs: BettingPreferences):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            sql = """
+                UPDATE BETTING_PREFERENCES 
+                SET min_bet = %s, max_bet = %s
+                WHERE gambler_id = %s
+            """
+            cursor.execute(sql, (prefs.min_bet, prefs.max_bet, prefs.gambler_id))
+            conn.commit()
+        finally:
+            cursor.close()
+            conn.close()

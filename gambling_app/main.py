@@ -7,6 +7,7 @@ from rich.table import Table
 from config.schema_manager import SchemaManager
 from controllers.gambler_controller import GamblerController
 from controllers.stake_controller import StakeController  # Added for UC2
+from controllers.betting_controller import BettingController
 
 console = Console()
 
@@ -21,14 +22,19 @@ def display_menu():
     console.print(Panel.fit("[bold cyan]Gambling App - Main Menu[/bold cyan]", border_style="cyan"))
     console.print("[dim]-- UC1: Gambler Profile --[/dim]")
     console.print("1. Create New Gambler Profile")
+    console.print("  1a. View Gambler Profile")
+    console.print("  1b. Edit Betting Preferences")
     console.print("2. Check Profile Eligibility (By ID)")
     console.print("3. Reset Profile for New Session (By ID)")
     console.print("[dim]-- UC2: Stake Management --[/dim]")
     console.print("4. Deposit Funds (By ID)")
     console.print("5. View Stake History Report (By ID)")
+    console.print("[dim]-- UC3: Betting Mechanism --[/dim]")
+    console.print("6. Place Manual Bet")
+    console.print("7. Auto-Play (Martingale Strategy)")
     console.print("[dim]----------------------------[/dim]")
-    console.print("6. Exit")
-    return Prompt.ask("Select an option", choices=["1", "2", "3", "4", "5", "6"])
+    console.print("8. Exit")
+    return Prompt.ask("Select an option", choices=["1", "1a", "1b", "2", "3", "4", "5", "6", "7", "8"])
 
 def main():
     # 1. Boot up DB
@@ -41,6 +47,7 @@ def main():
     # Instantiate Controllers
     gambler_controller = GamblerController()
     stake_controller = StakeController()
+    betting_controller = BettingController()  
 
     # 2. Main Event Loop
     while True:
@@ -53,31 +60,54 @@ def main():
             stake = FloatPrompt.ask("Initial Stake ($)")
             win_thresh = FloatPrompt.ask("Win Threshold ($) [Must be > Stake]")
             loss_thresh = FloatPrompt.ask("Loss Threshold ($) [Must be < Stake]")
+            min_bet = FloatPrompt.ask("Minimum Bet Limit ($)", default=5.0)
+            max_bet = FloatPrompt.ask("Maximum Bet Limit ($)", default=5000.0)
 
             with console.status("Creating profile..."):
                 result = gambler_controller.register_new_gambler(
                     username=username, email=email, 
-                    stake=stake, win_thresh=win_thresh, loss_thresh=loss_thresh
+                    stake=stake, win_thresh=win_thresh, loss_thresh=loss_thresh,
+                    min_bet=min_bet, max_bet=max_bet
                 )
             
             if result["status"] == "success":
                 profile = result["data"]
-                console.print(f"\n[bold green]✔ Profile Created Successfully! Gambler ID: {profile.gambler.gambler_id}[/bold green]\n")
-                
-                # UC2 Extension: Automatically create the initial transaction when a user is made
-                try:
-                    # Log the INITIAL_STAKE
-                    stake_controller.service.repo.process_transaction(
-                        gambler_id=profile.gambler.gambler_id,
-                        trans_type="INITIAL_STAKE",
-                        amount=profile.gambler.initial_stake,
-                        is_deduction=False
-                    )
-                except Exception as e:
-                    console.print(f"[bold yellow]⚠ Profile created, but failed to log initial stake audit: {e}[/bold yellow]")
-                    
+                console.print(f"\n[bold green]✔ Profile Created Successfully! Gambler ID: {profile.gambler.gambler_id}[/bold green]\n")                    
             else:
                 console.print(f"\n[bold red]✖ Error:[/bold red] {result['message']}\n")
+
+        elif choice == "1a":
+            console.print("\n[bold yellow]--- View Profile ---[/bold yellow]")
+            gid = Prompt.ask("Enter Gambler ID")
+            res = gambler_controller.get_profile(int(gid))
+            
+            if res["status"] == "success":
+                p = res["data"]
+                
+                table = Table(title=f"Profile: {p.gambler.username}")
+                table.add_column("Category", style="cyan")
+                table.add_column("Detail", style="magenta")
+                table.add_row("Status", "Active" if p.gambler.is_active else "Inactive")
+                table.add_row("Current Stake", f"${p.gambler.current_stake}")
+                table.add_row("Win/Loss Thresholds", f"Win: ${p.gambler.win_threshold} | Loss: ${p.gambler.loss_threshold}")
+                table.add_row("Betting Limits", f"Min: ${p.preferences.min_bet} | Max: ${p.preferences.max_bet}")
+                console.print(table)
+            else:
+                console.print(f"[bold red]✖ Error:[/bold red] {res['message']}")
+
+        elif choice == "1b":
+            console.print("\n[bold yellow]--- Edit Preferences ---[/bold yellow]")
+            gid = Prompt.ask("Enter Gambler ID")
+            min_bet = FloatPrompt.ask("New Min Bet ($)")
+            max_bet = FloatPrompt.ask("New Max Bet ($)")
+            
+            with console.status("Updating..."):
+                res = gambler_controller.update_preferences(int(gid), min_bet, max_bet)
+                
+            if res["status"] == "success":
+                console.print("[bold green]✔ Preferences Updated![/bold green]")
+            else:
+                console.print(f"[bold red]✖ Error:[/bold red] {res['message']}")
 
         elif choice == "2":
             gid = Prompt.ask("Enter Gambler ID")
@@ -107,10 +137,7 @@ def main():
                 console.print(table)
                 console.print()
                 
-                # UC2 Extension: Log the RESET transaction
-                stake_controller.service.repo.process_transaction(
-                    gambler_id=int(gid), trans_type="RESET", amount=g.initial_stake, is_deduction=False
-                )
+                
             except Exception as e:
                  console.print(f"[bold red]✖ Error:[/bold red] {str(e)}\n")
 
@@ -175,8 +202,69 @@ def main():
                 console.print()
             else:
                 console.print(f"\n[bold red]✖ Error:[/bold red] {rep_res['message']}\n")
-
         elif choice == "6":
+            console.print("\n[bold yellow]--- Place Single Bet ---[/bold yellow]")
+            gid = Prompt.ask("Enter Gambler ID")
+            amount = FloatPrompt.ask("Bet Amount ($)")
+            
+            with console.status("Rolling the dice..."):
+                res = betting_controller.play_single_game(int(gid), amount)
+                
+            if res["status"] == "success":
+                data = res["data"]
+                outcome = data['game'].outcome
+                color = "green" if outcome == "WIN" else "red"
+                console.print(f"\n[bold {color}]Outcome: {outcome}![/bold {color}]")
+                console.print(f"Net Change: {data['game'].net_change}")
+                console.print(f"New Balance: ${data['game'].stake_after}\n")
+            else:
+                console.print(f"\n[bold red]✖ Error:[/bold red] {res['message']}\n")
+
+        elif choice == "7":
+            console.print("\n[bold yellow]--- Auto-Play Strategy ---[/bold yellow]")
+            gid = Prompt.ask("Enter Gambler ID")
+            
+            # Show options and get strategy
+            strategy_choices = ["FIXED", "PERCENTAGE", "MARTINGALE", "REVERSE_MARTINGALE"]
+            console.print(f"Available Strategies: [cyan]{', '.join(strategy_choices)}[/cyan]")
+            strategy_code = Prompt.ask("Select Strategy", choices=strategy_choices, default="MARTINGALE")
+            
+            # If percentage, we ask for % instead of $. Otherwise, standard base bet.
+            if strategy_code == "PERCENTAGE":
+                base = FloatPrompt.ask("Bet Percentage of Stake (%)", default=5.0)
+            else:
+                base = FloatPrompt.ask("Base Bet Amount ($)")
+                
+            rounds = int(Prompt.ask("Max Rounds to Play"))
+            
+            with console.status(f"Playing {strategy_code} strategy..."):
+                # Pass their chosen strategy_code directly into the controller!
+                res = betting_controller.play_auto_strategy(int(gid), base, rounds, strategy_code)
+                
+            if res["status"] == "success":
+                console.print(f"\n[bold green]✔ Auto-Play Complete. Rounds Played: {res['rounds_played']}[/bold green]")
+                
+                # Print History Table
+                table = Table(title=f"Betting History ({strategy_code})")
+                table.add_column("Round", style="dim")
+                table.add_column("Bet", style="cyan")
+                table.add_column("Outcome", style="bold")
+                table.add_column("Balance After", style="magenta")
+                
+                for i, r in enumerate(res["history"]):
+                    if "status" in r and r["status"] == "error":
+                        console.print(f"[bold red]Stopped at round {r['round']} due to error: {r['message']}[/bold red]")
+                        break
+                    
+                    g = r["game"]
+                    color = "green" if g.outcome == "WIN" else "red"
+                    
+                    # Ensure payout and loss are displayed nicely with two decimals
+                    bet_val = g.payout_amount if g.outcome == 'WIN' else g.loss_amount
+                    table.add_row(str(i+1), f"${bet_val:.2f}", f"[{color}]{g.outcome}[/{color}]", f"${g.stake_after:.2f}")
+                console.print(table)
+
+        elif choice == "8":
             console.print("[bold cyan]Exiting application. Goodbye![/bold cyan]")
             break
 

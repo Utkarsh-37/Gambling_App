@@ -78,6 +78,71 @@ class SchemaManager:
                 )
             """)
 
+            # 4. BETTING_STRATEGIES
+            logger.info("Ensuring table BETTING_STRATEGIES exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS BETTING_STRATEGIES (
+                    strategy_id TINYINT AUTO_INCREMENT PRIMARY KEY,
+                    strategy_code VARCHAR(50) UNIQUE NOT NULL,
+                    strategy_name VARCHAR(100) NOT NULL,
+                    strategy_type VARCHAR(50) NOT NULL,
+                    is_progressive BOOLEAN DEFAULT FALSE,
+                    is_active BOOLEAN DEFAULT TRUE,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+            # Seed Strategies
+            cursor.execute("""
+                INSERT IGNORE INTO BETTING_STRATEGIES (strategy_code, strategy_name, strategy_type, is_progressive) VALUES 
+                ('FIXED', 'Fixed Amount Strategy', 'FLAT', FALSE),
+                ('PERCENTAGE', 'Percentage of Stake', 'PROPORTIONAL', FALSE),
+                ('MARTINGALE', 'Martingale (Double on Loss)', 'PROGRESSIVE', TRUE),
+                ('REVERSE_MARTINGALE', 'Reverse Martingale (Double on Win)', 'PROGRESSIVE', TRUE),
+                ('FIBONACCI', 'Fibonacci Sequence', 'PROGRESSIVE', TRUE)
+            """)
+
+            # 5. BETS
+            logger.info("Ensuring table BETS exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS BETS (
+                    bet_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    session_id BIGINT NULL,
+                    gambler_id BIGINT NOT NULL,
+                    strategy_id TINYINT NULL,
+                    game_index INT DEFAULT 1,
+                    bet_amount DECIMAL(15,2) NOT NULL,
+                    win_probability DECIMAL(5,4) NOT NULL,
+                    odds_type VARCHAR(50) DEFAULT 'FIXED',
+                    odds_value DECIMAL(10,2) DEFAULT 2.0,
+                    potential_win DECIMAL(15,2) NOT NULL,
+                    stake_before DECIMAL(15,2) NOT NULL,
+                    stake_after DECIMAL(15,2) NULL,
+                    is_settled BOOLEAN DEFAULT FALSE,
+                    placed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (gambler_id) REFERENCES GAMBLERS(gambler_id) ON DELETE CASCADE,
+                    FOREIGN KEY (strategy_id) REFERENCES BETTING_STRATEGIES(strategy_id)
+                )
+            """)
+
+            # 6. GAME_RECORDS
+            logger.info("Ensuring table GAME_RECORDS exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS GAME_RECORDS (
+                    game_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    session_id BIGINT NULL,
+                    bet_id BIGINT UNIQUE NOT NULL,
+                    outcome VARCHAR(20) NOT NULL,
+                    payout_amount DECIMAL(15,2) DEFAULT 0.00,
+                    loss_amount DECIMAL(15,2) DEFAULT 0.00,
+                    net_change DECIMAL(15,2) NOT NULL,
+                    stake_before DECIMAL(15,2) NOT NULL,
+                    stake_after DECIMAL(15,2) NOT NULL,
+                    resolved_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (bet_id) REFERENCES BETS(bet_id) ON DELETE CASCADE
+                )
+            """)
+
             self.base_conn.commit()
             logger.info("Schema initialization complete for UC1.")
         except mysql.connector.Error as err:

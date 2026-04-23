@@ -63,3 +63,17 @@ class GamblerProfileService:
         
         self.repo.update_gambler(g)
         return self.repo.get_gambler_profile_by_id(gambler_id)
+    
+    @service_logger
+    def update_betting_limits(self, gambler_id: int, min_bet: Decimal, max_bet: Decimal):
+        if max_bet < min_bet:
+            raise ValidationException("Max bet cannot be less than min bet.", "max_bet", max_bet)
+            
+        profile = self.repo.get_gambler_profile_by_id(gambler_id)
+        if not profile:
+            raise ValidationException("Gambler not found.", "gambler_id", gambler_id)
+            
+        profile.preferences.min_bet = min_bet
+        profile.preferences.max_bet = max_bet
+        self.repo.update_preferences(profile.preferences)
+        return profile
