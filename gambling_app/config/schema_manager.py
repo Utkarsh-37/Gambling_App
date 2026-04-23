@@ -59,6 +59,25 @@ class SchemaManager:
                 )
             """)
 
+            # 3. STAKE_TRANSACTIONS
+            logger.info("Ensuring table STAKE_TRANSACTIONS exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS STAKE_TRANSACTIONS (
+                    transaction_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    session_id BIGINT NULL,
+                    gambler_id BIGINT NOT NULL,
+                    bet_id BIGINT NULL,
+                    game_id BIGINT NULL,
+                    transaction_type VARCHAR(50) NOT NULL,
+                    amount DECIMAL(15,2) NOT NULL,
+                    balance_before DECIMAL(15,2) NOT NULL,
+                    balance_after DECIMAL(15,2) NOT NULL,
+                    transaction_ref VARCHAR(100),
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (gambler_id) REFERENCES GAMBLERS(gambler_id) ON DELETE CASCADE
+                )
+            """)
+
             self.base_conn.commit()
             logger.info("Schema initialization complete for UC1.")
         except mysql.connector.Error as err:
