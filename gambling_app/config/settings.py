@@ -19,5 +19,7 @@ settings = Settings()
 # Setup basic logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='app.log',  # <--- This magically sends all logs to a file instead of the screen!
+    filemode='a'         # 'a' means append (add to the end of the file)
 )
