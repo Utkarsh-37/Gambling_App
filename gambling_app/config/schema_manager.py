@@ -118,6 +118,64 @@ class SchemaManager:
                 )
             """)
 
+            # 9. ODDS_CONFIGURATIONS
+            logger.info("Ensuring table ODDS_CONFIGURATIONS exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ODDS_CONFIGURATIONS (
+                    odds_config_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    odds_type VARCHAR(50) NOT NULL,
+                    fixed_multiplier DECIMAL(10,2) NULL,
+                    american_odds INT NULL,
+                    decimal_odds DECIMAL(10,2) NULL,
+                    house_edge DECIMAL(5,4) DEFAULT 0.0000,
+                    is_default BOOLEAN DEFAULT FALSE
+                )
+            """)
+            cursor.execute("""
+                INSERT IGNORE INTO ODDS_CONFIGURATIONS (odds_config_id, odds_type, fixed_multiplier, american_odds, decimal_odds, house_edge, is_default) VALUES 
+                (1, 'FIXED', 2.00, NULL, NULL, 0.0000, TRUE),
+                (2, 'AMERICAN_FAV', NULL, -150, NULL, 0.0500, FALSE),
+                (3, 'AMERICAN_DOG', NULL, 200, NULL, 0.0500, FALSE),
+                (4, 'DECIMAL', NULL, NULL, 2.50, 0.0200, FALSE),
+                (5, 'PROBABILITY_BASED', NULL, NULL, NULL, 0.0200, FALSE)
+            """)
+
+            # 10. RUNNING_TOTALS_SNAPSHOTS
+            logger.info("Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RUNNING_TOTALS_SNAPSHOTS (
+                    snapshot_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    session_id BIGINT NOT NULL,
+                    game_id BIGINT NOT NULL,
+                    total_games INT DEFAULT 0, total_wins INT DEFAULT 0, total_losses INT DEFAULT 0,
+                    total_winnings DECIMAL(15,2) DEFAULT 0.00, total_losses_amount DECIMAL(15,2) DEFAULT 0.00,
+                    net_profit DECIMAL(15,2) DEFAULT 0.00, win_rate DECIMAL(5,4) DEFAULT 0.0000,
+                    profit_factor DECIMAL(10,2) DEFAULT 0.00, roi DECIMAL(10,4) DEFAULT 0.0000,
+                    longest_win_streak INT DEFAULT 0, longest_loss_streak INT DEFAULT 0,
+                    current_win_streak INT DEFAULT 0, current_loss_streak INT DEFAULT 0,
+                    FOREIGN KEY (session_id) REFERENCES SESSIONS(session_id) ON DELETE CASCADE,
+                    FOREIGN KEY (game_id) REFERENCES GAME_RECORDS(game_id) ON DELETE CASCADE
+                )
+            """)
+
+            # 11. VALIDATION_EVENTS
+            logger.info("Ensuring table VALIDATION_EVENTS exists...")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS VALIDATION_EVENTS (
+                    validation_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    session_id BIGINT NULL,
+                    gambler_id BIGINT NULL,
+                    error_type VARCHAR(50) NOT NULL,
+                    severity VARCHAR(20) NOT NULL,
+                    field_name VARCHAR(50) NULL,
+                    attempted_value VARCHAR(255) NULL,
+                    message TEXT NOT NULL,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (session_id) REFERENCES SESSIONS(session_id) ON DELETE SET NULL,
+                    FOREIGN KEY (gambler_id) REFERENCES GAMBLERS(gambler_id) ON DELETE CASCADE
+                )
+            """)
+
             self.base_conn.commit()
             logger.info("Schema fully rebuilt for UC4.")
         except mysql.connector.Error as err:
