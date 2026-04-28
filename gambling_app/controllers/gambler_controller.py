@@ -8,7 +8,6 @@ class GamblerController:
     def __init__(self):
         self.service = GamblerProfileService()
 
-    # Update the method signature in gambler_controller.py
     def register_new_gambler(self, username: str, email: str, stake: float, win_thresh: float, loss_thresh: float, min_bet: float = 5.0, max_bet: float = 1000.0):
         try:
             g = Gambler(
@@ -16,7 +15,6 @@ class GamblerController:
                 initial_stake=Decimal(str(stake)), current_stake=Decimal(str(stake)),
                 win_threshold=Decimal(str(win_thresh)), loss_threshold=Decimal(str(loss_thresh))
             )
-            # Update this line to use the variables
             p = BettingPreferences(min_bet=Decimal(str(min_bet)), max_bet=Decimal(str(max_bet)))
             profile = GamblerProfile(gambler=g, preferences=p)
             

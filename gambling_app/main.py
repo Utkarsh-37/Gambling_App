@@ -9,7 +9,6 @@ def setup_infrastructure():
     """Run startup checks and schema generation."""
     with console.status("[bold green]Checking Database Schema...") as status:
         schema_manager = SchemaManager()
-        # Using IF NOT EXISTS safely across all 11 tables
         schema_manager.initialize_schema()
     console.print("[bold green]✔ Database Ready![/bold green]\n")
 
