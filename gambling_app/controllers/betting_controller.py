@@ -28,7 +28,6 @@ class BettingController:
         results = []
         strategy = self.strategies.get(strategy_code, FixedAmountStrategy())
         
-        # FIX: We need current stake to calculate Round 1 for Percentage Strategy
         profile = self.service.profile_service.repo.get_gambler_profile_by_id(gambler_id)
         if not profile:
             return {"status": "error", "message": "Gambler not found."}
@@ -44,7 +43,6 @@ class BettingController:
         prev_outcome = None
 
         for i in range(rounds):
-            # ... KEEP THE REST OF YOUR FOR LOOP EXACTLY THE SAME ...
             try:
                 res = self.service.place_and_settle_bet(gambler_id, current_bet, win_probability=0.45)
                 results.append(res)

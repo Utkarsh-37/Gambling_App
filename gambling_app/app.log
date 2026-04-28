@@ -22,3 +22,308 @@
 2026-04-23 22:38:31,609 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
 2026-04-23 22:38:31,611 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
 2026-04-23 22:38:31,614 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 10:14:33,098 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 10:14:33,142 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 10:14:33,145 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 10:14:33,147 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 10:14:33,149 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 10:16:19,812 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 10:16:19,844 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 10:16:19,845 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 10:16:19,847 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 10:16:19,848 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 10:17:53,651 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:17:53,657 - services.betting_service - WARNING - Validation failed in place_and_settle_bet: Bet outside preferences limits ($5.00 - $1000.00).
+2026-04-24 10:25:47,098 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 10:25:47,241 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 10:25:47,243 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 10:25:47,244 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 10:25:47,246 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 10:32:26,146 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:32:26,163 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:32:26,169 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:32:26,174 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:32:26,176 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:32:26,176 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:32:26,176 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:32:26,182 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:32:26,186 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:32:26,190 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:32:26,191 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:32:26,192 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:32:26,192 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:32:26,197 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:32:26,201 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:32:26,205 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:32:26,206 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:32:26,206 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:32:26,206 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:32:26,212 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:32:26,216 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:32:26,219 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:32:26,220 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:32:26,221 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:32:26,221 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:32:26,226 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:32:26,230 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:32:26,233 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:32:26,234 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:32:26,234 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:32:26,234 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:32:26,236 - services.betting_service - WARNING - Validation failed in place_and_settle_bet: Bet outside preferences limits ($5.00 - $1000.00).
+2026-04-24 10:32:38,518 - services.stake_management_service - INFO - Executing generate_report
+2026-04-24 10:32:38,521 - services.stake_management_service - INFO - Successfully executed generate_report
+2026-04-24 10:32:47,707 - services.game_session_manager - INFO - Executing start_session
+2026-04-24 10:32:47,711 - services.gambler_profile_service - INFO - Executing validate_eligibility
+2026-04-24 10:32:47,712 - services.gambler_profile_service - INFO - Successfully executed validate_eligibility
+2026-04-24 10:32:47,727 - services.game_session_manager - INFO - Successfully executed start_session
+2026-04-24 10:33:06,242 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:33:06,284 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:33:06,290 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:33:06,299 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:33:06,300 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:33:06,305 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:33:06,305 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:33:06,311 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:33:06,317 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:33:06,327 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:33:06,328 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:33:06,332 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:33:06,332 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:33:06,338 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:33:06,344 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:33:06,353 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:33:06,354 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:33:06,358 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:33:06,358 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:33:06,364 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:33:06,368 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:33:06,377 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:33:06,378 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:33:06,381 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:33:06,381 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:33:06,386 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 10:33:06,391 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 10:33:06,399 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 10:33:06,400 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 10:33:06,403 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 10:33:06,403 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 10:33:06,406 - services.betting_service - WARNING - Validation failed in place_and_settle_bet: Bet outside preferences limits ($5.00 - $1000.00).
+2026-04-24 10:33:32,976 - services.game_session_manager - INFO - Executing end_session
+2026-04-24 10:33:32,995 - services.game_session_manager - INFO - Successfully executed end_session
+2026-04-24 13:14:27,089 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 13:14:27,150 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 13:14:27,156 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 13:14:27,158 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 13:14:27,161 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 13:34:50,634 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,668 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,682 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:50,694 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:50,700 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:50,701 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:50,701 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,722 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,735 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:50,745 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:50,751 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:50,751 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:50,751 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,770 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,782 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:50,804 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:50,808 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:50,809 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:50,809 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,827 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,840 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:50,852 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:50,857 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:50,858 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:50,858 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,880 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,895 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:50,909 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:50,915 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:50,915 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:50,915 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,932 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,944 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:50,955 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:50,960 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:50,961 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:50,961 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:34:50,980 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:34:50,992 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:34:51,002 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:34:51,007 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:34:51,008 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:34:59,732 - services.stake_management_service - INFO - Executing generate_report
+2026-04-24 13:34:59,739 - services.stake_management_service - INFO - Successfully executed generate_report
+2026-04-24 13:37:26,047 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 13:37:26,159 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 13:37:26,163 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 13:37:26,166 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 13:37:26,170 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 13:37:44,659 - services.gambler_profile_service - INFO - Executing create_profile
+2026-04-24 13:37:44,678 - services.gambler_profile_service - INFO - Successfully executed create_profile
+2026-04-24 13:37:56,395 - services.game_session_manager - INFO - Executing start_session
+2026-04-24 13:37:56,406 - services.gambler_profile_service - INFO - Executing validate_eligibility
+2026-04-24 13:37:56,412 - services.gambler_profile_service - INFO - Successfully executed validate_eligibility
+2026-04-24 13:37:56,429 - services.game_session_manager - INFO - Successfully executed start_session
+2026-04-24 13:38:19,781 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:19,855 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:19,868 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:19,891 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:19,895 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:19,904 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:19,905 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:19,923 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:19,935 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:19,955 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:19,960 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:19,970 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:19,971 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:19,988 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:19,999 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:20,019 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:20,025 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:20,035 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:20,035 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:20,054 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:20,067 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:20,088 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:20,093 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:20,101 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:20,102 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:20,119 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:20,133 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:20,155 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:20,160 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:20,168 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:20,169 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:20,185 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:20,195 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:20,217 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:20,223 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:20,234 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:20,234 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 13:38:20,251 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:38:20,263 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:38:20,307 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:38:20,312 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 13:38:20,322 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 13:38:54,481 - services.game_session_manager - INFO - Executing end_session
+2026-04-24 13:38:54,547 - services.game_session_manager - INFO - Successfully executed end_session
+2026-04-24 13:46:40,557 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 13:46:40,638 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 13:46:40,642 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 13:46:40,644 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 13:46:40,647 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 13:46:43,920 - services.gambler_profile_service - INFO - Executing reset_profile_for_new_session
+2026-04-24 13:46:43,948 - services.gambler_profile_service - INFO - Successfully executed reset_profile_for_new_session
+2026-04-24 13:47:04,083 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 13:47:04,143 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 13:47:04,144 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 13:47:04,149 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 14:11:55,098 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 14:11:55,151 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 14:11:55,156 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 14:11:55,159 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 14:11:55,163 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 14:12:11,942 - services.game_session_manager - INFO - Executing end_session
+2026-04-24 14:12:11,949 - services.game_session_manager - WARNING - Validation failed in end_session: No active or paused session to end.
+2026-04-24 14:16:33,789 - services.gambler_profile_service - INFO - Executing create_profile
+2026-04-24 14:16:33,811 - services.gambler_profile_service - INFO - Successfully executed create_profile
+2026-04-24 14:23:15,826 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 14:23:15,912 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 14:23:15,916 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 14:23:15,920 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 14:23:15,923 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 14:23:39,502 - services.gambler_profile_service - INFO - Executing update_betting_limits
+2026-04-24 14:23:39,530 - services.gambler_profile_service - INFO - Successfully executed update_betting_limits
+2026-04-24 14:47:25,722 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 14:47:25,775 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 14:47:25,780 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 14:47:25,783 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 14:47:25,785 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 15:13:32,157 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 15:13:32,203 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 15:13:32,206 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 15:13:32,209 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 15:13:32,212 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 15:25:45,689 - config.schema_manager - INFO - Ensuring database 'gambling_db' exists...
+2026-04-24 15:25:45,742 - config.schema_manager - INFO - Ensuring table ODDS_CONFIGURATIONS exists...
+2026-04-24 15:25:45,746 - config.schema_manager - INFO - Ensuring table RUNNING_TOTALS_SNAPSHOTS exists...
+2026-04-24 15:25:45,750 - config.schema_manager - INFO - Ensuring table VALIDATION_EVENTS exists...
+2026-04-24 15:25:45,754 - config.schema_manager - INFO - Schema fully rebuilt for UC4.
+2026-04-24 15:26:34,671 - services.gambler_profile_service - INFO - Executing create_profile
+2026-04-24 15:26:34,725 - services.gambler_profile_service - INFO - Successfully executed create_profile
+2026-04-24 15:26:55,449 - services.game_session_manager - INFO - Executing start_session
+2026-04-24 15:26:55,462 - services.gambler_profile_service - INFO - Executing validate_eligibility
+2026-04-24 15:26:55,469 - services.gambler_profile_service - INFO - Successfully executed validate_eligibility
+2026-04-24 15:26:55,543 - services.game_session_manager - INFO - Successfully executed start_session
+2026-04-24 15:28:08,023 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,092 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,109 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,137 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,145 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,159 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:08,160 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,180 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,198 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,227 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,234 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,247 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:08,248 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,271 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,289 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,312 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,319 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,329 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:08,330 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,347 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,358 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,374 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,379 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,386 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:08,387 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,403 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,413 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,431 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,434 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,441 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:08,441 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,453 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,459 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,472 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,475 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,485 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:08,485 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:28:08,496 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:28:08,506 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:28:08,523 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:28:08,525 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:28:08,531 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:28:36,677 - services.game_session_manager - INFO - Executing end_session
+2026-04-24 15:28:36,738 - services.game_session_manager - INFO - Successfully executed end_session
+2026-04-24 15:37:43,360 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:37:43,420 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:37:43,432 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:37:43,442 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:37:43,448 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:37:43,449 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:37:43,449 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:37:43,467 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:37:43,481 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:37:43,493 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:37:43,498 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:37:43,498 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:37:43,499 - services.betting_service - INFO - Executing place_and_settle_bet
+2026-04-24 15:37:43,516 - services.stake_management_service - INFO - Executing adjust_stake
+2026-04-24 15:37:43,526 - services.stake_management_service - INFO - Successfully executed adjust_stake
+2026-04-24 15:37:43,535 - services.stake_management_service - INFO - Executing check_boundaries
+2026-04-24 15:37:43,541 - services.stake_management_service - INFO - Successfully executed check_boundaries
+2026-04-24 15:37:43,541 - services.betting_service - INFO - Successfully executed place_and_settle_bet
+2026-04-24 15:37:53,410 - services.stake_management_service - INFO - Executing generate_report
+2026-04-24 15:37:53,417 - services.stake_management_service - INFO - Successfully executed generate_report

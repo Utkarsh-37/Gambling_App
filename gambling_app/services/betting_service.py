@@ -41,7 +41,6 @@ class BettingService:
         if amount < prefs.min_bet or amount > prefs.max_bet:
             raise ValidationException(f"Bet outside preferences limits (${prefs.min_bet:.2f} - ${prefs.max_bet:.2f}).")
 
-        # UC5: Setup Default Odds (You can fetch this from DB later)
         odds = OddsConfiguration(odds_type="FIXED", fixed_multiplier=Decimal("2.0"), house_edge=Decimal("0.02"))
 
         # 3. Record Bet Placement
@@ -79,9 +78,7 @@ class BettingService:
         
         # UC5: Generate Deep Statistics Snapshot
         if active_session:
-            # Need game_id which is created by settle_bet_and_record_game. 
-            # (Note: In a real app, update repository to return the game_id).
-            game_rec.game_id = bet.bet_id # Temporary mapping since bet_id and game_id are 1:1 right now
+            game_rec.game_id = bet.bet_id 
             self.calculator.generate_snapshot(active_session.session_id, game_rec, active_session.starting_stake)
 
         # 7. Check Boundaries & UPDATE SESSION
